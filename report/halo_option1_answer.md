@@ -2,13 +2,11 @@
 
 **HALO undergraduate challenge — Option 1**
 
-**Applicant:** Eric Wang
+**Applicant:** Yi Fan (Eric) Wang
 
 **Date:** July 29, 2026
 
 ## 1. My interpretation of the challenge
-
-I understand this question as asking for a clear and feasible **experimental plan**, not a completed research paper. My main proposal is therefore a controlled comparison of multilingual and multi-domain adaptation. I also built a small zero-shot notebook to check that the selected model, languages, datasets, and evaluation code work together. That notebook supports the plan; it is not a substitute for the proposed experiment.
 
 My research question is:
 
