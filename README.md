@@ -3,15 +3,15 @@
 This repository is the reproducibility package for the HALO undergraduate
 challenge response:
 
-> **Multilingual vs. Multi-domain NMT: A Controlled Experimental Plan with
-> Multilingual Grounding Diagnostics**
+> **Multilingual vs. Multi-domain NMT: Experimental Plan**
 
 It contains two deliberately separate contributions:
 
-1. an **executed zero-shot demonstration** for English→Gujarati, Georgian,
-   Tamil, and Simplified Chinese; and
-2. a **proposed, not executed** equal-budget LoRA comparison of multilingual
-   and multi-domain adaptation.
+1. a **proposed, not executed** equal-budget LoRA comparison of multilingual
+   and multi-domain adaptation; and
+2. a small **executed zero-shot demonstration** for English→Gujarati,
+   Georgian, Tamil, and Simplified Chinese that checks the feasibility of the
+   data and evaluation pipeline.
 
 The demonstration uses
 [`facebook/nllb-200-distilled-600M`](https://huggingface.co/facebook/nllb-200-distilled-600M)
@@ -22,7 +22,7 @@ non-commercial research.
 
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EricWcr7/multilingual-vs-multidomain-nmt/blob/codex/halo-modern-pilot/notebooks/halo_option1_demo.ipynb)
 
-[Read the six-page submission report (PDF)](report/halo_option1_answer.pdf)
+[Read the interview response and experimental plan (PDF)](report/halo_option1_answer.pdf)
 
 ## Repository contents
 
