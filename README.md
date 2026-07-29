@@ -22,6 +22,8 @@ non-commercial research.
 
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EricWcr7/multilingual-vs-multidomain-nmt/blob/codex/halo-modern-pilot/notebooks/halo_option1_demo.ipynb)
 
+[Read the six-page submission report (PDF)](report/halo_option1_answer.pdf)
+
 ## Repository contents
 
 ```text
@@ -31,7 +33,8 @@ non-commercial research.
 ├── notebooks/
 │   └── halo_option1_demo.ipynb
 ├── report/
-│   └── halo_option1_answer.md
+│   ├── halo_option1_answer.md
+│   └── halo_option1_answer.pdf
 └── results/
     ├── demo_manifest.json
     ├── demo_predictions.csv
