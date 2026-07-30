@@ -78,6 +78,12 @@ target/
 # Jupyter Notebook
 .ipynb_checkpoints
 
+# HALO demo: raw corpora, model caches, and private review material
+data/
+model_cache/
+artifacts/private/
+halo_option1_results.zip
+
 # IPython
 profile_default/
 ipython_config.py
