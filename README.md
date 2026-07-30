@@ -72,6 +72,73 @@ that plan.
 Raw datasets and model checkpoints are downloaded to temporary storage and
 are not committed.
 
+## How the code works
+
+The implementation is contained in
+[`notebooks/halo_option1_demo.ipynb`](notebooks/halo_option1_demo.ipynb).
+Its cells form one reproducible pipeline:
+
+1. **Pin the environment.** The notebook installs exact package versions,
+   records the Python, PyTorch, and hardware configuration, and fixes all
+   random seeds.
+2. **Verify inputs.** It downloads pinned revisions of NTREX-128, WMT24++,
+   TICO-19, and NLLB, then checks the expected SHA-256 hash of every data and
+   model file before using it.
+3. **Prepare the data.** Text is normalized and deduplicated, invalid WMT24++
+   rows are removed, and deterministic document-level splits are created.
+   Assertions check schemas, row counts, split isolation, source-hash leakage,
+   token limits, and target-language mappings.
+4. **Define the experiment and sample the demonstration.** The code records
+   the equal-budget LoRA arm manifests described in the plan, but does not
+   train them. It separately chooses a deterministic zero-shot sample for the
+   executable demonstration.
+5. **Run inference.** The pinned NLLB checkpoint translates groups of English
+   sources into Gujarati, Georgian, Tamil, or Simplified Chinese with
+   four-beam decoding. The code verifies each language token and forced
+   beginning-of-sentence token before generation.
+6. **Evaluate and export.** It computes chrF++ and language-appropriate
+   SacreBLEU scores, runs numeric source-faithfulness and Mandarin
+   counterfactual checks, prepares the manual audit worksheet, and writes the
+   five public artifacts in `results/`.
+
+The optional `HALO_REDUCED_DEMO=1` environment variable selects a smaller
+smoke-test sample. `HALO_LOCAL_MODEL_DIR` can reuse a local checkpoint only
+when all expected model files match the pinned hashes. COMET is included as
+an optional, disabled secondary metric; it is not required for the reported
+results.
+
+## Demo results
+
+The executed demonstration produced 190 nonempty zero-shot translations.
+The aggregate results for its eight evaluation cells are:
+
+| Test condition | n | chrF++ | BLEU | Source-number recall |
+|---|---:|---:|---:|---:|
+| Gujarati news | 25 | 48.01 | 18.10 | 82.4% |
+| Georgian news | 25 | 47.07 | 18.24 | 76.5% |
+| Tamil news | 25 | 45.97 | 11.64 | 82.4% |
+| Mandarin news | 25 | 22.77 | 29.69 | 70.6% |
+| Mandarin medical | 25 | 34.62 | 40.51 | 90.2% |
+| Mandarin social | 15 | 28.16 | 22.82 | 33.3% |
+| Mandarin speech | 15 | 17.46 | 23.45 | 80.0% |
+| Mandarin literary | 15 | 12.13 | 13.15 | 12.5% |
+
+The scores show that zero-shot performance varies substantially by language
+and domain. Mandarin medical produced the strongest reported Mandarin scores,
+while Mandarin literary was the weakest condition. These cells use different
+corpora, sample sizes, and reference styles, so they should not be treated as
+a controlled ranking.
+
+A manual review of 20 Mandarin outputs found 8 omissions, 6 contradictions,
+and 5 entity or number mutations; these categories can overlap. Six of the 10
+Mandarin counterfactual pairs passed all sensitivity criteria. The failures
+included dropped or incorrectly rendered facts and unrelated wording changes.
+
+The result establishes that the pinned data, inference, evaluation, and export
+pipeline runs end to end. It does **not** determine whether multilingual or
+multi-domain adaptation is better, because the proposed LoRA comparison has
+not been trained.
+
 ## Run in Colab
 
 1. Open the badge above.
