@@ -22,7 +22,33 @@ non-commercial research.
 
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EricWcr7/multilingual-vs-multidomain-nmt/blob/codex/halo-modern-pilot/notebooks/halo_option1_demo.ipynb)
 
-[Read the interview response and experimental plan (PDF)](report/halo_option1_answer.pdf)
+[Read the undergraduate challenge question response (PDF)](undergraduate_challenge_question_response.pdf)
+
+## Plan at a glance
+
+The proposed study asks whether a fixed adaptation budget is better spent
+across target languages or across domains. Every adapted system starts from
+the same NLLB checkpoint, uses the same LoRA configuration, and receives 308
+training examples. The comparison includes:
+
+- an unadapted baseline;
+- a Mandarin-news control that receives more data without added diversity;
+- a multilingual system trained on news in Mandarin, Gujarati, Georgian, and
+  Tamil; and
+- a multi-domain system trained on Mandarin news, social, speech, and literary
+  text.
+
+The plan uses document-level splits and source hashing to prevent leakage.
+It evaluates translation quality with chrF++ and SacreBLEU, then checks source
+faithfulness through number and date preservation, a bilingual Mandarin audit,
+and controlled source changes. Three training seeds and document-level
+bootstrap confidence intervals are proposed so that results can be reported
+by language and domain rather than reduced to a single winner.
+
+The LoRA comparison is an experimental proposal and has not been run. The
+notebook in this repository is a smaller, executed zero-shot demonstration
+that verifies the data, inference, and evaluation pipeline needed to support
+that plan.
 
 ## Repository contents
 
@@ -30,11 +56,11 @@ non-commercial research.
 .
 ├── README.md
 ├── requirements.txt
+├── undergraduate_challenge_question_response.pdf
 ├── notebooks/
 │   └── halo_option1_demo.ipynb
 ├── report/
-│   ├── halo_option1_answer.md
-│   └── halo_option1_answer.pdf
+│   └── halo_option1_answer.md
 └── results/
     ├── demo_manifest.json
     ├── demo_predictions.csv
